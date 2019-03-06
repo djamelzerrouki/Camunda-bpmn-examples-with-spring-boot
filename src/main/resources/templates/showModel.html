@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<!-- 	<th:block th:include="/fragments/head :: head"></th:block> -->
+	<th:block th:include="/fragments/head :: head"></th:block>
 	<style>
 /* Center the loader */
 #loader {
@@ -58,10 +58,10 @@ margin: 0;
 <div style="display:none;" id="myDiv" class="animate-bottom">
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-<!-- 		<th:block th:include="/fragments/menu :: menu"></th:block> -->
+		<th:block th:include="/fragments/menu :: menu"></th:block>
 
 		<div id="fh5co-main">
-<!-- 	<th:block th:include="/fragments/menu2 :: menu2"></th:block> -->
+	<th:block th:include="/fragments/menu2 :: menu2"></th:block>
 
 <div style="padding:0 16px;">
 	<h1 th:utext="${modelName}" ></h1>
@@ -140,29 +140,6 @@ function showPage() {
   document.getElementById("myDiv").style.display = "block";
 }
 </script>
-<script>
-function getData() {
-var text = document.getElementById("textarea").value;
-var text = text.replace(/\r?\n/g, '<br />');
-document.getElementById("display").innerHTML = text;
-}
-
-function picture() {
-var picture = document.getElementById("picture").value;
-document.getElementById("pDisplay").src = picture;
-document.getElementById("purl").innerHTML = picture;
-}
-</script>
-<title>Gettings a textbox formatting</title>
-</head>
-<body>
-
-<textarea id = "textarea" onkeypress = "getData()" autofocus></textarea>
-<p id = "display">You havnt typed anything yet</p>
-<input type = "file" id = "picture" onclick = "picture()">
-<button onclick = "picture()">get the picture from the box</button>
-<p id = "purl">picture url</p>
-<img id = "pDisplay">
 </body>
 </html>
 
