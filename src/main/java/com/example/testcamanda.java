@@ -21,14 +21,19 @@ import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.camunda.bpm.model.xml.type.ModelElementType;
 
 public class testcamanda {
-	public static String path="../camandaproject\\src\\main\\resources\\loanApproval.bpmn";
+	//camandaproject uploads
+	public static final String pathUploads="..\\camandaproject\\uploads\\";
+
+	public static final String path="../camandaproject\\src\\main\\resources\\loanApproval.bpmn";
 	static BpmnModelInstance modelInstance;
 	public static void mymethod(String path){
-		path="C:\\Users\\djamel\\jimmi\\Downloads\\"+path;
+		path=pathUploads+path;
 		File file = new File(path);
 		BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
 		getTaskNode(modelInstance,path);
-		// find element instance by ID
+		
+		
+		/*// find element instance by ID
 		StartEvent start = (StartEvent) modelInstance.getModelElementById("start");
 
 		// find all elements of the type task
@@ -46,7 +51,7 @@ public class testcamanda {
 		// get all outgoing sequence flows of the source
 		Collection<SequenceFlow> outgoing = source.getOutgoing();
 		assert(outgoing.contains(sequenceFlow));
-
+*/
 	}
 	public static void main(String[] arges){
 		mymethod(path);

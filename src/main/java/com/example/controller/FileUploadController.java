@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.testcamanda;
+
 @Controller
 public class FileUploadController {
   public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
@@ -25,8 +27,13 @@ public class FileUploadController {
 	  for (MultipartFile file : files) {
 		  Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
 		  fileNames.append(file.getOriginalFilename()+" ");
+		  System.out.println("name file:"+fileNames);
+		
 		  try {
 			Files.write(fileNameAndPath, file.getBytes());
+			//Config.configAll(namemodel,index);
+			  
+	 		testcamanda.mymethod(fileNames.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
