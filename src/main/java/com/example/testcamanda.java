@@ -24,9 +24,10 @@ public class testcamanda {
 	public static String path="../camandaproject\\src\\main\\resources\\loanApproval.bpmn";
 	static BpmnModelInstance modelInstance;
 	public static void mymethod(String path){
-		File file = new File("C:\\Users\\djamel\\jimmi\\Downloads\\"+path);
+		path="C:\\Users\\djamel\\jimmi\\Downloads\\"+path;
+		File file = new File(path);
 		BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
-		getTaskNode(modelInstance);
+		getTaskNode(modelInstance,path);
 		// find element instance by ID
 		StartEvent start = (StartEvent) modelInstance.getModelElementById("start");
 
@@ -78,7 +79,7 @@ public class testcamanda {
 		start.setAttributeValueNs("custom-attribute", "http://camunda.org/custom", "new value");
 	}
 	// task method get node
-	public static void getTaskNode(BpmnModelInstance modelInstance ){
+	public static void getTaskNode(BpmnModelInstance modelInstance ,String path){
 		Collection<Task> tasks = (Collection<Task>) modelInstance.getModelElementsByType(Task.class);
 		tasks.forEach(t->{
 
@@ -86,7 +87,7 @@ public class testcamanda {
 			String id = t.getId();
 			String name = t.getName();
 			String type=t.getElementType().getTypeName();
-			List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() );
+			List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() ,path);
 
 			System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
 			possibleTasks.forEach(tsk->{
@@ -98,8 +99,8 @@ public class testcamanda {
 	}
 
 
-	public List<Task> getNextTasks(  String taskDefinitionKey ) {
-		File file = new File("../camandaproject\\src\\main\\resources\\loanApproval.bpmn");
+	public List<Task> getNextTasks(  String taskDefinitionKey ,String path ) {
+		File file = new File(path);
 
 		BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
 		ModelElementInstance instance = modelInstance.getModelElementById(taskDefinitionKey);

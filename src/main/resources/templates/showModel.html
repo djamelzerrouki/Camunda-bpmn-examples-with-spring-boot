@@ -82,7 +82,7 @@ margin: 0;
 						<form th:action="createmodel" method="post" >
 							<label class="control-label">Ficher BPMN : </label> <input
 								type="file" name="file" th:value="file"
-								class="form-control" required="required" />
+								class="form-control" accept=".bpmn" required="required" />
 							<div></div>
 							<div class="col-md-offset-10">
 								<button type="submit"  class="btn btn-primary">Suivant</button>
@@ -140,6 +140,29 @@ function showPage() {
   document.getElementById("myDiv").style.display = "block";
 }
 </script>
+<script>
+function getData() {
+var text = document.getElementById("textarea").value;
+var text = text.replace(/\r?\n/g, '<br />');
+document.getElementById("display").innerHTML = text;
+}
+
+function picture() {
+var picture = document.getElementById("picture").value;
+document.getElementById("pDisplay").src = picture;
+document.getElementById("purl").innerHTML = picture;
+}
+</script>
+<title>Gettings a textbox formatting</title>
+</head>
+<body>
+
+<textarea id = "textarea" onkeypress = "getData()" autofocus></textarea>
+<p id = "display">You havnt typed anything yet</p>
+<input type = "file" id = "picture" onclick = "picture()">
+<button onclick = "picture()">get the picture from the box</button>
+<p id = "purl">picture url</p>
+<img id = "pDisplay">
 </body>
 </html>
 

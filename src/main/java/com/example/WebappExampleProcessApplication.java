@@ -15,6 +15,8 @@
  */
 package com.example;
 
+import java.io.File;
+
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.camunda.bpm.spring.boot.starter.event.PostDeployEvent;
@@ -23,6 +25,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.event.EventListener;
 
+import com.example.controller.FileUploadController;
+
+ 
 @SpringBootApplication
 @EnableProcessApplication
 public class WebappExampleProcessApplication {
@@ -31,6 +36,8 @@ public class WebappExampleProcessApplication {
 	private RuntimeService runtimeService;
 
 	public static void main(String... args) {
+		new File(FileUploadController.uploadDirectory).mkdir();
+
 		SpringApplication.run(WebappExampleProcessApplication.class, args);
 	}
 
