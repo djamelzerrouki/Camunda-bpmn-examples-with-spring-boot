@@ -21,9 +21,10 @@ import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.camunda.bpm.model.xml.type.ModelElementType;
 
 public class testcamanda {
+	public static String path="../camandaproject\\src\\main\\resources\\loanApproval.bpmn";
 	static BpmnModelInstance modelInstance;
-	static void mymethod(){
-		File file = new File("../camandaproject\\src\\main\\resources\\loanApproval.bpmn");
+	public static void mymethod(String path){
+		File file = new File("C:\\Users\\djamel\\jimmi\\Downloads\\"+path);
 		BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
 		getTaskNode(modelInstance);
 		// find element instance by ID
@@ -47,7 +48,7 @@ public class testcamanda {
 
 	}
 	public static void main(String[] arges){
-		mymethod();
+		mymethod(path);
 	}
 
 	public static  Collection<FlowNode> getFlowingFlowNodes(FlowNode node) {
