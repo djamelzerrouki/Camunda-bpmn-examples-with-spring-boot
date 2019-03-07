@@ -11,8 +11,8 @@ public static final  String pathconfigDB="../serverconfig/src/main/java/com/exam
 // path for repository 
 //FinalName.pathRepository
 public static final  String pathRepository="../serverconfig/src/main/java/com/example/repository/";
-///serverconfig/src/main/resources/application.properties
+///serverconfig/src/main/resources/bootstrap.properties
 //FinalName.pathApplicationProperties
-public static final  String pathApplicationProperties="../serverconfig/src/main/resources/application.properties";
+public static final  String pathApplicationProperties="../serverconfig/src/main/resources/bootstrap.properties";
 
 }
