@@ -76,16 +76,20 @@
 					<thead>
 						<tr>
 							<th>Id</th>
+							<th>Td Task</th>
 							<th>Nom</th>
- 							<th>typemodel</th>
+ 							<th>typetask</th>
 						 
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="c:${services}">
 							<td th:text="${c.id}"></td>
+							<td th:text="${c.idtask}"></td>
 							<td th:text="${c.name}"></td>
-<!-- 							<td th:text="${c.typemodel}"></td> -->
+							<td th:text="${c.type}"></td>
+<!-- 						
+	<td th:text="${c.typemodel}"></td> -->
 							<td >
 								<a> <i class="fa fa-edit" style="font-size:21 px;color:blue;"></i></a>
 								<a> <i class="fa fa-trash" style="font-size:21 px;color:red;"></i></a>

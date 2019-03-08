@@ -101,7 +101,9 @@ public static String uploadDirectory = System.getProperty("user.dir")+"/uploads"
 							String name = t.getName();
 							String type=t.getElementType().getTypeName();
 							Service srv =new Service();
-					 		srv.setName(name);
+					 		srv.setIdtask(id);
+							srv.setName(name);
+							srv.setType(type);
 					 		rsd.save(srv);
 
 						});

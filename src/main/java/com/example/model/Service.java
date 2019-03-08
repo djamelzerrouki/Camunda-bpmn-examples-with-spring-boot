@@ -25,8 +25,12 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long id;
+    private String idtask;
     private String name;
+    private String type;
+ 
     
+       
  
 	 
      
