@@ -95,12 +95,12 @@ public static Collection<Task> getTaskNode(BpmnModelInstance modelInstance ,Stri
 			String id = t.getId();
 			String name = t.getName();
 			String type=t.getElementType().getTypeName();
-			List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() ,path);
-
-			System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
-			possibleTasks.forEach(tsk->{
-				System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
-			});
+//			List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() ,path);
+//
+//			System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
+//			possibleTasks.forEach(tsk->{
+//				System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
+//			});
 
 		});
 		return tasks;
@@ -109,6 +109,8 @@ public static Collection<Task> getTaskNode(BpmnModelInstance modelInstance ,Stri
 
 
 	public List<Task> getNextTasks(  String taskDefinitionKey ,String path ) {
+		path=pathUploads+path;
+
 		File file = new File(path);
 
 		BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);

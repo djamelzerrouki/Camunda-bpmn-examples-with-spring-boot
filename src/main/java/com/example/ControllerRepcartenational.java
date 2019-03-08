@@ -106,8 +106,18 @@ private   static int i=1;
 					srv.setIdtask(id);
 					srv.setName(name);
 					srv.setType(type);
-					rsd.save(srv);
+
 					 
+					List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() ,fileNames.toString());
+
+					System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
+					possibleTasks.forEach(tsk->{
+						srv.setNextidtask(tsk.getId());
+
+						System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
+					});
+					
+					rsd.save(srv);
 				});
 
 

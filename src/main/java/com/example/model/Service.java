@@ -28,6 +28,8 @@ public class Service {
     private String idtask;
     private String name;
     private String type;
+    private String nextidtask;
+
  
     
        
