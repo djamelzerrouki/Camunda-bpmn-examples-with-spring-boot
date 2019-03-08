@@ -23,11 +23,8 @@ public class Config {
 
 	public static void main(String[] args) throws IOException {
 		// TODO main test methode by jimmi
-		configAll("djamel",6);
-		configAll("a",6);
-		configAll("b",6);
-		configAll("c",6);
-		  configAll("permis",6);
+		 
+		  configAll("mode3",6);
 
 
 		/*
