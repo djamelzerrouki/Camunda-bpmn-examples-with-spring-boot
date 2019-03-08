@@ -395,7 +395,7 @@ public class Config {
 				"		namedb=namemodel;\r\n" + 
 				" 		model.addAttribute(\"modelName\",namedb);\r\n" + 
 				" \r\n" + 
-				"		return \"showModel\";\r\n" + 
+				"		return \"uploadview\";\r\n" + 
 				"\r\n" + 
 				"	}" + 
 				"	//Employe\r\n" + 

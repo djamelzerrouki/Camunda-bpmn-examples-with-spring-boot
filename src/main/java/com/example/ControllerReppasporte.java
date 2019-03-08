@@ -37,7 +37,7 @@ private static String namedb;
 		namedb=namemodel;
  		model.addAttribute("modelName",namedb);
  
-		return "showModel";
+		return "uploadview";
 
 	}	//Employe
 		@RequestMapping(value="/Employe" ,method=RequestMethod.GET)

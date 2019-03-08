@@ -31,7 +31,7 @@ import com.example.controller.FileUploadController;
  
 @SpringBootApplication
 @EnableProcessApplication
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 
 public class WebappExampleProcessApplication {
 
