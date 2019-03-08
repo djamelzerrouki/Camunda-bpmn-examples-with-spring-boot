@@ -26,7 +26,7 @@ public class Employe implements Serializable{
 	private String name;
 	private String password;
 	private String tlphon;
- 	private Long servicid;
+  	private Long servicid;
 	@DateTimeFormat(pattern="yyyy-MM-dd")   
     private Date datenes;
     
