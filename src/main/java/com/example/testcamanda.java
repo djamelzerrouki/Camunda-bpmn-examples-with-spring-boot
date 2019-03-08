@@ -26,11 +26,11 @@ public class testcamanda {
 // path ta3 ficher bpmn fe lproject 
 	public static final String path="../camandaproject\\src\\main\\resources\\loanApproval.bpmn";
 	static BpmnModelInstance modelInstance;
-	public static void mymethod(String path){
+	public static Collection<Task> mymethod(String path){
 		path=pathUploads+path;
 		File file = new File(path);
 		BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
-		getTaskNode(modelInstance,path);
+		return getTaskNode(modelInstance,path);
 		
 		
 		/*// find element instance by ID
@@ -87,7 +87,7 @@ public static void getStertEventNode(BpmnModelInstance modelInstance ){
 	}
 	// task method get node
 	
-public static void getTaskNode(BpmnModelInstance modelInstance ,String path){
+public static Collection<Task> getTaskNode(BpmnModelInstance modelInstance ,String path){
 		Collection<Task> tasks = (Collection<Task>) modelInstance.getModelElementsByType(Task.class);
 		tasks.forEach(t->{
 
@@ -103,6 +103,7 @@ public static void getTaskNode(BpmnModelInstance modelInstance ,String path){
 			});
 
 		});
+		return tasks;
 
 	}
 

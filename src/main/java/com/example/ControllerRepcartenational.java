@@ -5,8 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
+import org.camunda.bpm.model.bpmn.instance.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,13 +93,28 @@ public static String uploadDirectory = System.getProperty("user.dir")+"/uploads"
 						Files.write(fileNameAndPath, file.getBytes());
 						//Config.configAll(namemodel,index);
 						  
-				 		testcamanda.mymethod(fileNames.toString());
-					} catch (IOException e) {
+						Collection<Task> tasks =testcamanda.mymethod(fileNames.toString());
+						tasks.forEach(t->{
+
+							// read attributes bvars.entrySet()y helper methods
+							String id = t.getId();
+							String name = t.getName();
+							String type=t.getElementType().getTypeName();
+							Service srv =new Service();
+					 		srv.setName(name);
+					 		rsd.save(srv);
+
+						});
+				 
+				 		
+				 		
+				 		
+					  } catch (IOException e) {
 						e.printStackTrace();
 					}
 				  }
 				  model.addAttribute("msg", "Successfully uploaded files "+fileNames.toString());
-				  return "uploadstatusview";
+				  return "redirect:Service";
 			  }
 			  
 
