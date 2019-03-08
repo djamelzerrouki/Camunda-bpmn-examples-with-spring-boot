@@ -1,6 +1,9 @@
 package com.example;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.model.Employe;
 import com.example.model.Service;
@@ -27,7 +31,8 @@ public class ControllerRepcartenational {
 	private   RepoServicecartenational rsd ;
 	 	 
 private static String namedb; 
-	
+public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
+
 	// Modele selectioner
 	@RequestMapping("/model" )
 	public String model(Model model,@RequestParam(name = "m") String namemodel) throws IOException, SQLException {
@@ -72,4 +77,29 @@ private static String namedb;
 			public String bpmnModele()  {
 		 		return "bpmn";
 			}
+			
+
+			  @RequestMapping("/upload")
+			  public String upload(Model model,@RequestParam("files") MultipartFile[] files) {
+				  StringBuilder fileNames = new StringBuilder();
+				  for (MultipartFile file : files) {
+					  Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+					  fileNames.append(file.getOriginalFilename()+" ");
+					  System.out.println("name file:"+fileNames);
+					
+					  try {
+						Files.write(fileNameAndPath, file.getBytes());
+						//Config.configAll(namemodel,index);
+						  
+				 		testcamanda.mymethod(fileNames.toString());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				  }
+				  model.addAttribute("msg", "Successfully uploaded files "+fileNames.toString());
+				  return "uploadstatusview";
+			  }
+			  
+
+			
 }
