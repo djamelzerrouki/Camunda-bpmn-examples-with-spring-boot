@@ -38,7 +38,7 @@
 
 							<div class="panel-body">
 
-								<form th:action="@{saveEnployee}" method="post"
+								<form th:action="@{updateEmploye(id=${enployee.id})}" method="post"
 									th:object="${enployee}">
 
 									<div class="form-group">
@@ -72,7 +72,7 @@
 										</select> <span></span>
 									</div>
 									<div>
-										<button type="submit" class="btn btn-primary">Enregistré</button>
+										<button type="submit" class="btn btn-primary">Modefier</button>
 									</div>
 								</form>
 							</div>
