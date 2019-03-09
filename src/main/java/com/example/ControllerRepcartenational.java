@@ -8,10 +8,14 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.camunda.bpm.model.bpmn.instance.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,9 +54,10 @@ private   static int i=1;
 	@RequestMapping(value="/Employe" ,method=RequestMethod.GET)
 	public String formEmploye(Model model) {
 		List<Employe> list = red.findAll();
+		 model.addAttribute("services", rsd.findAll());
 		model.addAttribute("enployee",new Employe());
 		model.addAttribute("enployees",list);
-		return "addenployee";
+ 		return "addenployee";
 	}
 	//Service
 	@RequestMapping(value="/Service" ,method=RequestMethod.GET)
@@ -64,7 +69,8 @@ private   static int i=1;
 	}
 
 	@RequestMapping(value="/saveEnployee" ,method=RequestMethod.POST)
-	public String saveEnployee(Employe ep) {
+	public String saveEnployee(Model model, @Valid @ModelAttribute("enployee")Employe ep, BindingResult result) {
+		System.out.println("### :->"+ep.getService());
 		red.save(ep);
 		return "redirect:Employe";
 	}	
