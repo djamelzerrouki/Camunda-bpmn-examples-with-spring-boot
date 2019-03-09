@@ -66,7 +66,7 @@
 <!-- 										<input type="number" th:field="*{service}" -->
 <!-- 											class="form-control" placeholder="Code de Service" required /> -->
 
-										<select th:field="*{service}" class="form-control">
+										<select th:field="*{service.id}" class="form-control">
 											<option th:each="s: ${services}"
 												th:value="${s.id}" th:text="${s.name}"  required></option>
 										</select> <span></span>
@@ -127,7 +127,7 @@
 								<td th:text="${e.name}"></td>
 								<td th:text="${e.password}"></td>
 								<td th:text="${e.tlphon}"></td>
-								<td th:text="${e.service}"></td>
+								<td th:text="${e.service.id}"></td>
 								<td th:text="${e.datenes}"></td>
 								<td><a> <i class="fa fa-edit"
 										style="font-size: 21 px; color: blue;"></i></a> <a> <i

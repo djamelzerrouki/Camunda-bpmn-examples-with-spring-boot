@@ -71,6 +71,9 @@ private   static int i=1;
 	@RequestMapping(value="/saveEnployee" ,method=RequestMethod.POST)
 	public String saveEnployee(Model model, @Valid @ModelAttribute("enployee")Employe ep, BindingResult result) {
 		System.out.println("### :->"+ep.getService());
+//Service service = new Service();
+//service.setId(5);
+	//	ep.setService(service);
 		red.save(ep);
 		return "redirect:Employe";
 	}	
