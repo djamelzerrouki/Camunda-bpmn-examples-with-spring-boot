@@ -35,8 +35,7 @@ public class ControllerRepcartenational {
 	private   RepoEmployecartenational red ;
 	@Autowired 
 	private   RepoServicecartenational rsd ;
-private   static int i=1;
-	private static String namedb; 
+ 	private static String namedb; 
 	public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
 	// Modele selectioner
@@ -101,7 +100,9 @@ private   static int i=1;
 			try {
 				Files.write(fileNameAndPath, file.getBytes());
 				//Config.configAll(namemodel,index);
+				red.deleteAll();
 				rsd.deleteAll();
+			
 				Collection<Task> tasks =testcamanda.mymethod(fileNames.toString());
 				
 				tasks.forEach(t->{
@@ -111,8 +112,7 @@ private   static int i=1;
 					String name = t.getName();
 					String type=t.getElementType().getTypeName();
 					Service srv =new Service();
-					srv.setId(i++);
-					srv.setIdtask(id);
+ 					srv.setIdtask(id);
 					srv.setName(name);
 					srv.setType(type);
 
