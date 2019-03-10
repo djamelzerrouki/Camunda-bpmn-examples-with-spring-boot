@@ -1,5 +1,4 @@
 package com.example.model;
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -20,7 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Employe implements Serializable{
+public class Employe {
 
     
 	private String name;
