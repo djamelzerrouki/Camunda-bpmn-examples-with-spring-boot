@@ -188,10 +188,13 @@ public class ControllerRepcartenational {
 	@GetMapping("/findemploye")
 	@ResponseBody
 	public Employe findOne(@RequestParam(name ="id") Long id) {
- 		return red.findById(id)
+ 		return red.getOne(id);
+ 		/*
+ 		 
+ 		  return red.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid Employe Id:" + id));
 
-
+ 		 * */
 	}
 
 }

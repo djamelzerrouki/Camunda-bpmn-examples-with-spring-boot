@@ -1,8 +1,10 @@
 package com.example;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
 
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exomple.configfile.Config;
+@RefreshScope
 @Controller 
 @RequestMapping(value="/Modele")
 public class ModelController {
