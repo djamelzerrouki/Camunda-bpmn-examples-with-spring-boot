@@ -54,7 +54,7 @@ public class testcamanda {
 */
 	}
 	public static void main(String[] arges){
-		mymethod(path);
+	//	mymethod(path);
 	}
 
 	public static  Collection<FlowNode> getFlowingFlowNodes(FlowNode node) {
@@ -89,18 +89,24 @@ public static void getStertEventNode(BpmnModelInstance modelInstance ){
 	
 public static Collection<Task> getTaskNode(BpmnModelInstance modelInstance ,String path){
 		Collection<Task> tasks = (Collection<Task>) modelInstance.getModelElementsByType(Task.class);
+	
+	// allNextTasks();
 		tasks.forEach(t->{
 
 			// read attributes bvars.entrySet()y helper methods
 			String id = t.getId();
 			String name = t.getName();
 			String type=t.getElementType().getTypeName();
-//			List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() ,path);
-//
-//			System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
-//			possibleTasks.forEach(tsk->{
-//				System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
-//			});
+			List<Task> possibleTasks = getNextTasks(t.getId() ,path);
+//			List<Task> possibleTasks =	new testcamanda().getNextTasks(t.getId() ,path);
+
+			System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
+		 
+
+			possibleTasks.forEach(tsk->{
+				System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
+			
+			});
 
 		});
 		return tasks;
@@ -108,8 +114,18 @@ public static Collection<Task> getTaskNode(BpmnModelInstance modelInstance ,Stri
 	}
 
 
-	public List<Task> getNextTasks(  String taskDefinitionKey ,String path ) {
-		path=pathUploads+path;
+private static void allNextTasks() {
+	// TODO Auto-generated method stub
+	List<Task> possibleTasks=getNextTasks("Task_0nf0gpi" ,"path");
+	possibleTasks.forEach(tsk->{
+		System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() );
+	
+	});
+} 
+
+
+	public static List<Task> getNextTasks(  String taskDefinitionKey ,String path ) {
+		//path=pathUploads+path;
 
 		File file = new File(path);
 
@@ -118,7 +134,10 @@ public static Collection<Task> getTaskNode(BpmnModelInstance modelInstance ,Stri
 		FlowNode flowNode = (FlowNode)instance;
 		return getOutgoingTask(flowNode );
 	}
-	private List<Task> getOutgoingTask(FlowNode node ) {
+	
+	
+	
+	private static List<Task> getOutgoingTask(FlowNode node ) {
 		List<Task> possibleTasks = new ArrayList<>();
 
 		for(SequenceFlow sf: node.getOutgoing()) {
@@ -144,11 +163,12 @@ public static Collection<Task> getTaskNode(BpmnModelInstance modelInstance ,Stri
 				if (sf.getTarget() instanceof  Task) {
 					//LOGGER.info("Found next   task {}", sf.getTarget().getName());
 					//System.out.println("Found next   task : "+ sf.getTarget().getName());
+					
 					possibleTasks.add((Task) sf.getTarget());
-					break;
+					//break;
 				}
 
-				possibleTasks.addAll(getOutgoingTask(sf.getTarget()));
+			//	possibleTasks.addAll(getOutgoingTask(sf.getTarget()));
 			}
 
 

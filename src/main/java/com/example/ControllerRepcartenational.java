@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,10 +26,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.model.Employe;
+import com.example.model.MyTask;
+import com.example.model.NextTask;
 import com.example.model.Service;
+import com.example.repository.cartenational.Dossier;
+import com.example.repository.cartenational.RepoDossiercartenational;
 import com.example.repository.cartenational.RepoEmployecartenational;
+import com.example.repository.cartenational.RepoMyTaskcartenational;
+import com.example.repository.cartenational.RepoNextTaskcartenational;
 import com.example.repository.cartenational.RepoServicecartenational;
-import com.exomple.configfile.Config;
 @Controller 
 @RequestMapping(value="/model_cartenational")
 public class ControllerRepcartenational {
@@ -38,6 +43,14 @@ public class ControllerRepcartenational {
 	private   RepoEmployecartenational red ;
 	@Autowired 
 	private   RepoServicecartenational rsd ;
+	@Autowired 
+	private   RepoDossiercartenational rdd;
+	@Autowired 
+	private   RepoMyTaskcartenational rmtd;	
+	@Autowired 
+	private   RepoNextTaskcartenational rntd;	
+	
+//	
 	private static String namedb; 
 	public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
@@ -56,7 +69,7 @@ public class ControllerRepcartenational {
 	@RequestMapping(value="/Employe" ,method=RequestMethod.GET)
 	public String formEmploye(Model model) {
 		List<Employe> list = red.findAll();
-		model.addAttribute("services", rsd.findAll());
+		model.addAttribute("mytasks", rmtd.findAll());
 		model.addAttribute("enployee",new Employe());
 		model.addAttribute("enployees",list);
 		return "addenployee";
@@ -69,10 +82,26 @@ public class ControllerRepcartenational {
 		model.addAttribute("services",list);
 		return "addservice";
 	}
+	//addmytask
+	//Service
+	@RequestMapping(value="/Task" ,method=RequestMethod.GET)
+	public String formMyTask(Model model) {
+		List<MyTask> list = rmtd.findAll();
+		model.addAttribute("mytasks",list);
+		return "addmytask";
+	}
+	 
+	//Service
+	@RequestMapping(value="/Dossier" ,method=RequestMethod.GET)
+	public String formDossier(Model model) {
+		List<Dossier> list = rdd.findAll();
+ 		model.addAttribute("dossiers",list);
+		return "adddossier";
+	}
 
 	@RequestMapping(value="/saveEnployee" ,method=RequestMethod.POST)
 	public String saveEnployee(Model model, @Valid @ModelAttribute("enployee")Employe ep, BindingResult result) {
-		System.out.println("### :->"+ep.getService());
+		//System.out.println("### :->"+ep.getService());
 		//Service service = new Service();
 		//service.setId(5);
 		//	ep.setService(service);
@@ -103,9 +132,9 @@ public class ControllerRepcartenational {
 			try {
 				Files.write(fileNameAndPath, file.getBytes());
 				//Config.configAll(namemodel,index);
-				red.deleteAll();
-				rsd.deleteAll();
-
+//				red.deleteAll();
+//				rsd.deleteAll();
+				rmtd.deleteAll();
 				Collection<Task> tasks =testcamanda.mymethod(fileNames.toString());
 
 				tasks.forEach(t->{
@@ -114,22 +143,53 @@ public class ControllerRepcartenational {
 					String id = t.getId();
 					String name = t.getName();
 					String type=t.getElementType().getTypeName();
+					
+ 					MyTask myTask=new MyTask();
+ 					myTask.setIdtask(id);
+ 					myTask.setName(name);
+ 					myTask.setType(type);
+ 	/*
 					Service srv =new Service();
 					srv.setIdtask(id);
 					srv.setName(name);
 					srv.setType(type);
 
+*/
+//					List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() ,fileNames.toString());
+//
+//					System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
+//					possibleTasks.forEach(tsk->{
+//						srv.setNextidtask(tsk.getId());
+//
+//						System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
+//					});
 
-					List<Task> possibleTasks=	new testcamanda().getNextTasks(t.getId() ,fileNames.toString());
-
+ 					List<Task> possibleTasks= testcamanda.getNextTasks(t.getId() , testcamanda.pathUploads+fileNames.toString());
+                     Collection<NextTask> collection= new ArrayList<NextTask>();
 					System .out.println("ID: "+ id +" Name : "+name +" Type : "+type);
 					possibleTasks.forEach(tsk->{
-						srv.setNextidtask(tsk.getId());
+						NextTask nextTask= new NextTask();
+						nextTask.setMytask(myTask);
+						nextTask.setNextidtask(tsk.getId());
+						collection.add(nextTask);
+						
+						System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
+					});
+					
+					myTask.setNexttasks(collection);
+//					
+//					myTask
+//					rsd.save(srv);
+					rmtd.save(myTask);
+					possibleTasks.forEach(tsk->{
+						NextTask nextTask= new NextTask();
+						nextTask.setMytask(myTask);
+						nextTask.setNextidtask(tsk.getId());
+						collection.add(nextTask);
+						rntd.save(nextTask);
 
 						System .out.println("NEXT TASK -> ID: "+ tsk.getId() +" Name : "+tsk.getName() +" Type : "+type);
 					});
-
-					rsd.save(srv);
 				});
 
 
@@ -140,7 +200,7 @@ public class ControllerRepcartenational {
 			}
 		}
 		model.addAttribute("msg", "Successfully uploaded files "+fileNames.toString());
-		return "redirect:Service";
+		return "redirect:Task";
 	}
 
  
@@ -153,7 +213,7 @@ public class ControllerRepcartenational {
 			
 		}
 		red.save(employe);
-		model.addAttribute("services", rsd.findAll());
+		model.addAttribute("mytasks", rmtd.findAll());
 		model.addAttribute("enployee", employe);
 		model.addAttribute("enployees",red.findAll());
 		return "redirect:Employe";
@@ -166,7 +226,7 @@ public class ControllerRepcartenational {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid Employe Id:" + id));
 
 
-		model.addAttribute("services", rsd.findAll());
+		model.addAttribute("mytasks", rmtd.findAll());
 		model.addAttribute("enployee", employe);
 		model.addAttribute("enployees",red.findAll());
 

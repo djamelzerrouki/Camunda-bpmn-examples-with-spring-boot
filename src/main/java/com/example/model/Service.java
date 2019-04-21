@@ -1,15 +1,11 @@
 package com.example.model;
 
-import java.util.Collection;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,18 +19,14 @@ import lombok.ToString;
 @ToString
 public class Service {
  
-    
+     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long id;
-    private String idtask;
-    private String name;
-    private String type;
-    private String nextidtask;
-    @OneToMany(mappedBy="service")
-    private Collection<Employe> employes;
-
+     private String name;
+// 	@ManyToOne
+// 	private SousDirection sousdirection;
  
     
        

@@ -1,36 +1,41 @@
 package com.example.model;
-import java.util.Date;
+
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+ 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Historique {
-
+public class SousDirection {
+ 
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    private long id;
+    private String name;
+//    @OneToMany(mappedBy="sousdirection")
+//   private Collection<Service> services;
 
  
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
-	private Long id;
-	
-	private Long servicid;
-	
-	private Long dosseird;
-	@DateTimeFormat(pattern="yyyy-MM-dd")   
-	private Date datenes;
-	
+    
+       
+ 
+	 
+     
+   
+     
 }

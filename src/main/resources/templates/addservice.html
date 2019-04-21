@@ -12,59 +12,67 @@
 
 		<div id="fh5co-main">
 			<th:block th:include="/fragments/menu2 :: menu2"></th:block>
-
-<!-- 			<div style="padding: 0 16px;">
-				<h2>Responsive Topnav Example</h2>
-				<p>This example use media queries to stack the topnav vertically
-					when the screen size is 600px or less.</p>
-				<p>You will learn more about media queries and responsive web
-					design later in our CSS Tutorial.</p>
-				<h4>Resize the browser window to see the effect.</h4>
-			</div>
-
-
+ 
 
 			<div class="fh5co-narrow-content">
 				<h1 class="fh5co-heading animate-box"
 					data-animate-effect="fadeInLeft">Srervice</h1>
+ 
+<div class="myForm">
 
-
-
-
-				<div class="row animate-box" data-animate-effect="fadeInLeft">
-
-					<div class="col-md-6 col-sm-6 col-xs-12 spacer col-md-offset-3">
-						<div class="panel panel-default">
-							<div class="panel-heading">Ajouter Nouveau Srervice</div>
-
-							<div class="panel-body">
-
-								<form th:action="@{saveService}" method="post"
-									th:object="${service}">
+	<div class="row animate-box" data-animate-effect="fadeInLeft">
+				<div class="col-md-4 col-sm-4 col-xs-4 text-center">
+					<a   data-toggle="modal"
+					data-target="#exampleModal" data-whatever="@mdo"><span>Ajouter Nouveau Service </span> <i
+						class="icon-long-arrow-right"></i></a>
+				</div>
+			</div>
+ 
+				<form th:action="@{saveService}" method="post"
+					th:object="${service}">
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Service</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+								 
 
 									<div class="form-group">
-																				<label class="control-label">Nom:</label> 
-										<input type="text" th:field="*{name}" class="form-control"
-											placeholder="Nom" required /> <span></span>
+										<!-- 										<label class="control-label">Nom:</label>  -->
+										<input type="text" class="form-control" id="name" name="name"
+											placeholder="Nom" th:field="*{name}" required /> <span></span>
+									</div> 
+									
+<!-- 									<div class="form-group"> -->
+<!-- 																				<label class="control-label">Nom:</label>  -->
+<!-- 										<input type="text" class="form-control" id="name" name="sousdirection" -->
+<!-- 											placeholder="sousdirection" th:field="*{sousdirection}" required /> <span></span> -->
+<!-- 									</div> -->
+									<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>	
+										<button type="submit" class="btn btn-primary">Enregistré</button>
+								
 									</div>
 
-																	 <div class="form-group">
-										<label class="control-label">Nom:</label> 
-										<input type="text"
-											th:field="*{typemodel}"  class="form-control" placeholder="type de model" required/> <span></span>
-									</div> 
-									<div>
-										<button type="submit" class="btn btn-primary">Enregistré</button>
+							
+								
 									</div>
-								</form>
 							</div>
 						</div>
 					</div>
+				</form>
+			</div>
 
 
-
-				</div>
-			</div>  -->
 
 			<h2 class="fh5co-heading animate-box"
 				data-animate-effect="fadeInLeft"> Liste des Srervice</h2>
@@ -78,7 +86,7 @@
 					<thead>
 						<tr>
 							<th>Id</th>
-							<th>Td Task</th>
+						 
 							<th>Nom</th>
 							<th>typetask</th>
 
@@ -89,10 +97,8 @@
 					<tbody>
 						<tr th:each="c:${services}">
 							<td th:text="${c.id}"></td>
-							<td th:text="${c.idtask}"></td>
-							<td th:text="${c.name}"></td>
-							<td th:text="${c.type}"></td>
-							<td th:text="${c.nextidtask}"></td>
+ 							<td th:text="${c.name}"></td>
+							 
 							<!-- 						
 	<td th:text="${c.typemodel}"></td> -->
 							<td><a> <i class="fa fa-edit"

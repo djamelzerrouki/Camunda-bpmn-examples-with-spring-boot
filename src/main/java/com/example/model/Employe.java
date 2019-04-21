@@ -25,11 +25,12 @@ public class Employe {
 	private String name;
 	private String password;
 	private String tlphon;
-	@ManyToOne
-  	private Service service;
+//	@ManyToOne
+//  	private Service service;
 	@DateTimeFormat(pattern="yyyy-MM-dd")   
     private Date datenes;
-    
+	@ManyToOne
+  	private MyTask mytask;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")

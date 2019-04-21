@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +15,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 public class MyTask {
-@Id
-@Column(name="id")
-private String  id ;
-private String nom ;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id")
+	private long id;
+	private String idtask;
+	private String name;
+	private String type;
+	@ManyToOne
+	private Service service;
+	@OneToMany(mappedBy="mytask")
+	private Collection<NextTask> nexttasks;
+	@OneToMany(mappedBy="mytask")
+	private Collection<Employe> employes;
+
 }
