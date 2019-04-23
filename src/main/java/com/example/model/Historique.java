@@ -31,6 +31,8 @@ public class Historique {
 	
 	private Long dosseird;
 	@DateTimeFormat(pattern="yyyy-MM-dd")   
-	private Date datenes;
+	private Date dated;
+	@DateTimeFormat(pattern="yyyy-MM-dd")   
+	private Date datef;
 	
 }

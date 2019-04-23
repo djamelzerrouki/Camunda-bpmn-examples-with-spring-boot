@@ -29,12 +29,14 @@ import com.example.model.Employe;
 import com.example.model.MyTask;
 import com.example.model.NextTask;
 import com.example.model.Service;
+import com.example.model.SousDirection;
 import com.example.repository.cartenational.Dossier;
 import com.example.repository.cartenational.RepoDossiercartenational;
 import com.example.repository.cartenational.RepoEmployecartenational;
 import com.example.repository.cartenational.RepoMyTaskcartenational;
 import com.example.repository.cartenational.RepoNextTaskcartenational;
 import com.example.repository.cartenational.RepoServicecartenational;
+import com.example.repository.cartenational.RepoSousDirectioncartenational;
 @Controller 
 @RequestMapping(value="/model_cartenational")
 public class ControllerRepcartenational {
@@ -48,7 +50,12 @@ public class ControllerRepcartenational {
 	@Autowired 
 	private   RepoMyTaskcartenational rmtd;	
 	@Autowired 
-	private   RepoNextTaskcartenational rntd;	
+	private   RepoNextTaskcartenational rntd;
+	
+	@Autowired 
+private RepoSousDirectioncartenational rsdd;
+	
+	
 	
 //	
 	private static String namedb; 
@@ -78,15 +85,18 @@ public class ControllerRepcartenational {
 	@RequestMapping(value="/Service" ,method=RequestMethod.GET)
 	public String formService(Model model) {
 		List<Service> list = rsd.findAll();
-		model.addAttribute("service",new Employe());
+		model.addAttribute("sousdirections", rsdd.findAll());
+		model.addAttribute("sousdirection",new SousDirection());
+		model.addAttribute("service",new Service());
 		model.addAttribute("services",list);
-		return "addservice";
+		return "addsousdirection";
 	}
 	//addmytask
 	//Service
 	@RequestMapping(value="/Task" ,method=RequestMethod.GET)
 	public String formMyTask(Model model) {
 		List<MyTask> list = rmtd.findAll();
+		model.addAttribute("services", rsd.findAll());
 		model.addAttribute("mytasks",list);
 		return "addmytask";
 	}
@@ -110,10 +120,17 @@ public class ControllerRepcartenational {
 	}	
 	//saveService
 	@RequestMapping(value="/saveService" ,method=RequestMethod.POST)
-	public String saveService(Service srv) {
+	public String saveService(Model model, @Valid @ModelAttribute("service")Service srv, BindingResult result) {
 		rsd.save(srv);
 		return "redirect:Service";
 	}
+	//saveService
+		@RequestMapping(value="/saveSousDirection" ,method=RequestMethod.POST)
+		public String saveSousDirection(Model model, @Valid @ModelAttribute("sousdirection")SousDirection sousDirection, BindingResult result) {
+			rsdd.save(sousDirection);
+			return "redirect:Service";
+		}
+
 
 	@RequestMapping(value="/bpmn")
 	public String bpmnModele()  {
@@ -248,6 +265,7 @@ public class ControllerRepcartenational {
 	@GetMapping("/findemploye")
 	@ResponseBody
 	public Employe findOne(@RequestParam(name ="id") Long id) {
+		System.out.println(id);
  		return red.getOne(id);
  		/*
  		 
@@ -256,5 +274,7 @@ public class ControllerRepcartenational {
 
  		 * */
 	}
+	
+	//updateTache
 
 }

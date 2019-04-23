@@ -27,8 +27,8 @@ public class SousDirection {
     @Column(name="id")
     private long id;
     private String name;
-//    @OneToMany(mappedBy="sousdirection")
-//   private Collection<Service> services;
+    @OneToMany(mappedBy="sousdirection")
+   private Collection<Service> services;
 
  
     
